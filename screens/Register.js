@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, Image, TextInput, TouchableOpacity, View, Button } from 'react-native'
 import { auth } from '../firebase'
 
-const LoginScreen = () => {
+const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -19,19 +19,18 @@ const LoginScreen = () => {
     return unsubscribe
   }, [])
 
-  const handleSignUp = () => {navigation.navigate("Register")}
-
-  const handleLogin = () => {
+  
+  const handleSignUp = () => {
     auth
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
         const user = userCredentials.user;
-        console.log('Logged in with:', user.email);
+        console.log('Registered with:', user.email);
       })
       .catch(error => alert(error.message))
   }
 
-
+  
   return (
     
     <KeyboardAvoidingView
@@ -61,12 +60,6 @@ const LoginScreen = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={handleLogin}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
           onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
         >
@@ -74,19 +67,12 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <Button
-        title="Forgot Password?"
-        onPress={this.goToForgotPassword}
-        titleStyle={{
-          color: '#ff0000'
-        }}
-        type="clear"
-      />
+      
     </KeyboardAvoidingView>
   )
 }
 
-export default LoginScreen
+export default Register
 
 const styles = StyleSheet.create({
   container: {
