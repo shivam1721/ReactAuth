@@ -1,12 +1,27 @@
 import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { Image, Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { auth } from '../firebase'
 //import Styles from "../styles/Styles";
 
 
 const ForgotPassword = (props) => {
     const [email, setEmail] = useState("")
+    
+    
+
+        auth
+        .sendPasswordResetEmail(email)
+        .then(() => {
+            alert("Password reset email sent")
+            console.log('Password reset email sent successfully');
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
    
+        });
+
+
 
     return (
         <View style={Styles.mainView}>
