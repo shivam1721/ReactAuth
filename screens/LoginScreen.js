@@ -21,6 +21,8 @@ const LoginScreen = () => {
 
   const handleSignUp = () => {navigation.navigate("Register")}
 
+  const forgotPassword = () => {navigation.navigate("ForgotPassword")}
+
   const handleLogin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
@@ -59,6 +61,16 @@ const LoginScreen = () => {
         
       </View>
 
+      <Button
+        title="Forgot Password?"
+        //onPress={this.goToForgotPassword}
+        onPress={forgotPassword}
+        titleStyle={{
+          color: '#ff0000'
+        }}
+        type="clear"
+      />
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={handleLogin}
@@ -66,22 +78,23 @@ const LoginScreen = () => {
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        {/*
         <TouchableOpacity
           onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
+      */}
+      <View style={styles.registerHereWrapper}>
+                <Text style={styles.noAccountText}>Don't have an account?</Text>
+                <TouchableOpacity onPress={(e) => navigation.navigate('Register')}>
+                    <Text style={styles.registerHere}>Register Here!</Text>
+                </TouchableOpacity>
+            </View>
       </View>
 
-      <Button
-        title="Forgot Password?"
-        onPress={this.goToForgotPassword}
-        titleStyle={{
-          color: '#ff0000'
-        }}
-        type="clear"
-      />
+      
     </KeyboardAvoidingView>
   )
 }
@@ -134,4 +147,18 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 16,
   },
+  noAccountText: {
+    textAlign: 'center',
+    color: '#888888'
+},
+registerHereWrapper: {
+    marginTop: 120
+},
+registerHere: {
+    textAlign: 'center',
+    paddingTop: 5,
+    fontSize: 15,
+    textDecorationLine: 'underline',
+    fontWeight: '400'
+}
 })

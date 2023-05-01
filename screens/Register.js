@@ -4,6 +4,8 @@ import { KeyboardAvoidingView, StyleSheet, Text, Image, TextInput, TouchableOpac
 import { auth } from '../firebase'
 
 const Register = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -39,9 +41,22 @@ const Register = () => {
     >
       <Image
         source={require('../assets/logo.png')}
-        style={{ width: 150, height: 150 }}
+        style={{ width: 100, height: 100 }}
       />
       <View style={styles.inputContainer}>
+      <Text style={styles.titleView}>Welcome!</Text>
+      <TextInput
+          placeholder="FirstName"
+          value={firstName}
+          onChangeText={text => setFirstName(text)}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="LastName"
+          value={lastName}
+          onChangeText={text => setLastName(text)}
+          style={styles.input}
+        />
         <TextInput
           placeholder="Email"
           value={email}
@@ -67,6 +82,13 @@ const Register = () => {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.registerHereWrapper}>
+                <Text style={styles.noAccountText}>Already have an account?</Text>
+                <TouchableOpacity onPress={(e) => navigation.navigate('Login')}>
+                    <Text style={styles.registerHere}>Login Here!</Text>
+                </TouchableOpacity>
+      </View>
+
       
     </KeyboardAvoidingView>
   )
@@ -80,7 +102,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  
+  titleView: {
+    textAlign: 'center',
+    fontSize: 40,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   inputContainer: {
     width: '80%'
   },
@@ -120,4 +147,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 16,
   },
+  registerHereWrapper: {
+    marginTop: 70
+},
+registerHere: {
+    textAlign: 'center',
+    paddingTop: 5,
+    fontSize: 15,
+    textDecorationLine: 'underline',
+    fontWeight: '400'
+}
 })
